@@ -1,32 +1,16 @@
-/*
-Q1.Provide the list of markets in which customer "Atliq Exclusive" operates its
+/*Q1.Provide the list of markets in which customer "Atliq Exclusive" operates its
 business in the APAC region.
 */
 select distinct(market) 
 from dim_customer
 where customer='Atliq Exclusive' and region='APAC';
 
-/*
-Q2.What is the percentage of unique product increase in 2021 vs. 2020? The
+/*Q2.What is the percentage of unique product increase in 2021 vs. 2020? The
 final output contains these fields---
 unique_products_2020
 unique_products_2021
 percentage_chg
 */
-/*my approach
-SELECT count(distinct(p.product_code)) as unique_product_count,m.cost_year as _year
-from dim_product as p
-join fact_manufacturing_cost as m
-on p.product_code = m.product_code
-where m.cost_year=2020
-union
-SELECT count(distinct(p.product_code)),m.cost_year
-from dim_product as p
-join fact_manufacturing_cost as m
-on p.product_code = m.product_code
-where m.cost_year=2021*/
-
-/*--easy approach--*/
 SELECT 
     COUNT(DISTINCT p.product_code) AS unique_product_count,
     m.cost_year AS _year
@@ -65,8 +49,7 @@ FROM
     
 
 /*Q3.Provide a report with all the unique product counts for each segment and
-sort them in descending order of product counts. The final output contains
-2 fields,
+sort them in descending order of product counts. The final output contains 2 fields,
 segment
 product_count
 */
@@ -140,8 +123,7 @@ SELECT distinct(m.product_code) as productcode,p.product as productname,
 group by productcode,productname
 order by min_cost limit 1;
 
-/*
-Q6.Generate a report which contains the top 5 customers who received an
+/*Q6.Generate a report which contains the top 5 customers who received an
 average high pre_invoice_discount_pct for the fiscal year 2021 and in the
 Indian market. The final output contains these fields,
 customer_code
@@ -157,8 +139,7 @@ group by f.customer_code,c.customer
 order by average_discount_percentage desc 
 limit 5;
 
-/*
-Q7.Get the complete report of the Gross sales amount for the customer “Atliq
+/*Q7.Get the complete report of the Gross sales amount for the customer “Atliq
 Exclusive” for each month. This analysis helps to get an idea of low and
 high-performing months and take strategic decisions.
 The final report contains these columns:
