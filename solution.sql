@@ -11,20 +11,6 @@ unique_products_2020
 unique_products_2021
 percentage_chg
 */
-SELECT 
-    COUNT(DISTINCT p.product_code) AS unique_product_count,
-    m.cost_year AS _year
-FROM 
-    dim_product AS p
-JOIN 
-    fact_manufacturing_cost AS m ON p.product_code = m.product_code
-WHERE 
-    m.cost_year IN (2020, 2021)
-GROUP BY 
-    m.cost_year
-ORDER BY 
-    m.cost_year;
-
 WITH UniqueProductCounts AS (
     SELECT 
         COUNT(DISTINCT p.product_code) AS unique_product_count,
